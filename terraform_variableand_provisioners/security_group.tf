@@ -1,24 +1,8 @@
-# create default vpc if one does not exit
-resource "aws_default_vpc" "default_vpc" {
-}
-
-# use data source to get all avalablility zones in region
-data "aws_availability_zones" "available_zones" {}
-
-# create default subnet if one does not exit
-resource "aws_default_subnet" "default_az1" {
-  availability_zone = data.aws_availability_zones.available_zones.names[0]
-
-  tags = {
-    Name = "utrains default subnet"
-  }
-}
-
 # create security group for the ec2 instance
 resource "aws_security_group" "webserver_security_group" {
   name        = "sg"
   description = "allow access on ports 80 and 22"
-  vpc_id      = aws_default_vpc.default_vpc.id
+  vpc_id      = aws_vpc.lab_vpc.id
 
   # allow access on these port 80 and 22 for Server using Dynamic blocks. Values are all defined in the variables.tf file
   # allow access on port 8080 for Jenkins Server
