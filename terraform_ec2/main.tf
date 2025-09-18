@@ -13,7 +13,7 @@ terraform {
 
 // Loading our module : please put in the source attribute your own dir to your module create earlier.
 module "vpc" {
-  source = "./modules/vpc-ami-id"
+  source = "./vpc-ami-id"
   //source = "/home/hermann90/modules/vpc-ami-id"
   region = var.region
 }
